@@ -473,7 +473,7 @@ MariaDB [employee]> SELECT d.department_name AS department, COUNT(e.id) AS emplo
 +------------------+----------------+
 13 rows in set (0.006 sec)
 
-#7 List name, salary, and department name of managers (those who have a department but nomanager).
+#7 List name, salary, and department name of managers (those who have a department but no manager).
 MariaDB [employee]> SELECT e.name AS manager, e.salary, d.department_name AS department FROM employees e JOIN departments d ON e.department_id = d.id WHERE e.manager_id IS NULL;
 +----------+--------+------------------+
 | manager  | salary | department       |
