@@ -111,27 +111,12 @@ MariaDB [foy]> SELECT DISTINCT v.state FROM vets v LEFT JOIN stateterritories s 
 
 # 4 Source the StudentExample.sql and EmployeesDatabse.sql files. What are the new databases and new tables created?
 MariaDB [(none)]>  SOURCE C:/Users/foyje/Downloads/StudentExample.sql;
-Query OK, 1 row affected (0.002 sec)
-
 Database changed
 
 MariaDB [mynewpaltz]> create database employee;
-Query OK, 1 row affected (0.002 sec)
 
 MariaDB [mynewpaltz]>  SOURCE C:/Users/foyje/Downloads/EmployeesDatabase.sql;
 Database changed
-Query OK, 0 rows affected (0.011 sec)
-
-Query OK, 0 rows affected (0.007 sec)
-
-Query OK, 7 rows affected (0.002 sec)
-Records: 7  Duplicates: 0  Warnings: 0
-
-Query OK, 7 rows affected (0.003 sec)
-Records: 7  Duplicates: 0  Warnings: 0
-
-Query OK, 19 rows affected (0.001 sec)
-Records: 19  Duplicates: 0  Warnings: 0
 
 MariaDB [employee]> show databases;
 +--------------------+
