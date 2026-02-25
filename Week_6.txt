@@ -1,9 +1,5 @@
-MariaDB [employee]> SELECT
-    ->     e.name AS employee,
-    ->     m.name AS manager
-    -> FROM employees e
-    -> LEFT JOIN employees m
-    ->     ON e.manager_id = m.id;
+#1 List employees and their managers
+MariaDB [employee]> SELECT e.name AS employee, m.name AS manager FROM employees e LEFT JOIN employees m ON e.manager_id = m.id;
 +-----------+----------+
 | employee  | manager  |
 +-----------+----------+
@@ -198,12 +194,8 @@ MariaDB [employee]> SELECT
 +-----------+----------+
 188 rows in set (0.001 sec)
 
-MariaDB [employee]> SELECT
-    ->     d.department_name AS department,
-    ->     m.name AS manager
-    -> FROM departments d
-    -> LEFT JOIN employees m
-    ->     ON d.manager_id = m.id;
+#2 List departments and their managers
+MariaDB [employee]> SELECT d.department_name AS department, m.name AS manager FROM departments d LEFT JOIN employees m ON d.manager_id = m.id;
 +------------------+----------+
 | department       | manager  |
 +------------------+----------+
@@ -222,12 +214,8 @@ MariaDB [employee]> SELECT
 +------------------+----------+
 12 rows in set (0.001 sec)
 
-MariaDB [employee]> SELECT
-    ->     e.name AS employee,
-    ->     d.department_name AS department
-    -> FROM employees e
-    -> LEFT JOIN departments d
-    ->     ON e.department_id = d.id;
+#3 List the department each person works in
+MariaDB [employee]> SELECT e.name AS employee, d.department_name AS department FROM employees e LEFT JOIN departments d ON e.department_id = d.id;
 +-----------+------------------+
 | employee  | department       |
 +-----------+------------------+
@@ -422,10 +410,8 @@ MariaDB [employee]> SELECT
 +-----------+------------------+
 188 rows in set (0.002 sec)
 
-MariaDB [employee]> SELECT
-    ->     name
-    -> FROM employees
-    -> WHERE manager_id IS NULL;
+#4 Find employees who have no manager
+MariaDB [employee]> SELECT name FROM employees WHERE manager_id IS NULL;
 +----------+
 | name     |
 +----------+
@@ -446,10 +432,8 @@ MariaDB [employee]> SELECT
 +----------+
 14 rows in set (0.004 sec)
 
-MariaDB [employee]> SELECT
-    ->     name
-    -> FROM employees
-    -> WHERE department_id IS NULL;
+#5 Find employees who have no departments
+MariaDB [employee]> SELECT name FROM employees WHERE department_id IS NULL;
 +-----------+
 | name      |
 +-----------+
@@ -468,21 +452,8 @@ MariaDB [employee]> SELECT
 +-----------+
 12 rows in set (0.001 sec)
 
-MariaDB [employee]> SELECT
-    ->     d.department_name AS department,
-    ->     COUNT(e.id) AS employee_count
-    -> FROM departments d
-    -> LEFT JOIN employees e
-    ->     ON e.department_id = d.id
-    -> GROUP BY d.id, d.department_name
-    ->
-    -> UNION ALL
-    ->
-    -> SELECT
-    ->     'No Department' AS department,
-    ->     COUNT(*) AS employee_count
-    -> FROM employees
-    -> WHERE department_id IS NULL;
+# 6 Show a count of employees in each department, including those who have no departments.
+MariaDB [employee]> SELECT d.department_name AS department, COUNT(e.id) AS employee_count FROM departments d LEFT JOIN employees e ON e.department_id = d.id GROUP BY d.id, d.department_name UNION ALL SELECT 'No Department' AS department, COUNT(*) AS employee_count FROM employees WHERE department_id IS NULL;
 +------------------+----------------+
 | department       | employee_count |
 +------------------+----------------+
@@ -502,14 +473,8 @@ MariaDB [employee]> SELECT
 +------------------+----------------+
 13 rows in set (0.006 sec)
 
-MariaDB [employee]> SELECT
-    ->     e.name AS manager,
-    ->     e.salary,
-    ->     d.department_name AS department
-    -> FROM employees e
-    -> JOIN departments d
-    ->     ON e.department_id = d.id
-    -> WHERE e.manager_id IS NULL;
+#7 List name, salary, and department name of managers (those who have a department but nomanager).
+MariaDB [employee]> SELECT e.name AS manager, e.salary, d.department_name AS department FROM employees e JOIN departments d ON e.department_id = d.id WHERE e.manager_id IS NULL;
 +----------+--------+------------------+
 | manager  | salary | department       |
 +----------+--------+------------------+
@@ -528,15 +493,8 @@ MariaDB [employee]> SELECT
 +----------+--------+------------------+
 12 rows in set (0.001 sec)
 
-MariaDB [employee]> SELECT
-    ->     e.name AS employee,
-    ->     e.salary AS employee_salary,
-    ->     m.name AS manager,
-    ->     m.salary AS manager_salary
-    -> FROM employees e
-    -> JOIN employees m
-    ->     ON e.manager_id = m.id
-    -> WHERE e.salary > m.salary;
+#8 List employees whose salaries are higher than their manager’s salaries.
+MariaDB [employee]> SELECT e.name AS employee, e.salary AS employee_salary, m.name AS manager, m.salary AS manager_salary FROM employees e JOIN employees m ON e.manager_id = m.id WHERE e.salary > m.salary;
 +----------+-----------------+---------+----------------+
 | employee | employee_salary | manager | manager_salary |
 +----------+-----------------+---------+----------------+
