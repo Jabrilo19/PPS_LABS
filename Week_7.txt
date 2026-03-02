@@ -1,0 +1,589 @@
+MariaDB [(none)]>  SOURCE C:/Users/foyje/Downloads/Populate_Database_mynewpaltz.sql;
+
+#1 List students by name and ssn who are taking 5 courses
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn FROM StudentTable s JOIN EnrollmentTable e ON s.ssn = e.ssn GROUP BY s.ssn HAVING COUNT(e.courseID) = 5;
++-----------+----------+-----------+
+| firstName | lastName | ssn       |
++-----------+----------+-----------+
+| Kevin     | Green    | 100000041 |
+| Michelle  | Adams    | 100000042 |
+| Brian     | Nelson   | 100000043 |
+| Carol     | Baker    | 100000044 |
+| Edward    | Hall     | 100000045 |
+| Ronald    | Campbell | 100000047 |
+| Melissa   | Mitchell | 100000048 |
+| Timothy   | Carter   | 100000049 |
+| Deborah   | Roberts  | 100000050 |
+| Stephanie | Phillips | 100000052 |
+| Jeffrey   | Evans    | 100000053 |
+| Rebecca   | Turner   | 100000054 |
+| Ryan      | Diaz     | 100000055 |
+| Laura     | Parker   | 100000056 |
+| Sharon    | Edwards  | 100000058 |
+| Gary      | Collins  | 100000059 |
+| Cynthia   | Reyes    | 100000060 |
++-----------+----------+-----------+
+17 rows in set (0.018 sec)
+
+#2 List students by name and ssn who are taking 4 courses
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn FROM StudentTable s JOIN EnrollmentTable e ON s.ssn = e.ssn GROUP BY s.ssn HAVING COUNT(e.courseID) = 4;
++-----------+----------+-----------+ 
+| firstName | lastName | ssn       |
++-----------+----------+-----------+
+| Amanda    | Rivera   | 100000046 |
+| Jacob     | Cruz     | 100000057 |
++-----------+----------+-----------+
+2 rows in set (0.001 sec)
+
+#3 List students by name and ssn who are taking 3 courses
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn FROM StudentTable s JOIN EnrollmentTable e ON s.ssn = e.ssn GROUP BY s.ssn HAVING COUNT(e.courseID) = 3;
++-------------+-----------+-----------+
+| firstName   | lastName  | ssn       |
++-------------+-----------+-----------+
+| James       | Smith     | 100000001 |
+| Mary        | Johnson   | 100000002 |
+| Robert      | Williams  | 100000003 |
+| Patricia    | Brown     | 100000004 |
+| John        | Jones     | 100000005 |
+| Jennifer    | Garcia    | 100000006 |
+| Michael     | Miller    | 100000007 |
+| Linda       | Davis     | 100000008 |
+| David       | Rodriguez | 100000009 |
+| Elizabeth   | Martinez  | 100000010 |
+| William     | Hernandez | 100000011 |
+| Barbara     | Lopez     | 100000012 |
+| Richard     | Gonzalez  | 100000013 |
+| Susan       | Wilson    | 100000014 |
+| Joseph      | Anderson  | 100000015 |
+| Jessica     | Thomas    | 100000016 |
+| Thomas      | Taylor    | 100000017 |
+| Sarah       | Moore     | 100000018 |
+| Christopher | Jackson   | 100000019 |
+| Karen       | Martin    | 100000020 |
++-------------+-----------+-----------+
+20 rows in set (0.001 sec)
+
+#4 List students by name and ssn who are taking 2 courses
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn FROM StudentTable s JOIN EnrollmentTable e ON s.ssn = e.ssn GROUP BY s.ssn HAVING COUNT(e.courseID) = 2;
++-----------+------------+-----------+
+| firstName | lastName   | ssn       |
++-----------+------------+-----------+
+| Nicholas  | Stewart    | 100000061 |
+| Kathleen  | Morris     | 100000062 |
+| Eric      | Morales    | 100000063 |
+| Amy       | Murphy     | 100000064 |
+| Stephen   | Cook       | 100000065 |
+| Shirley   | Rogers     | 100000066 |
+| Jonathan  | Gutierrez  | 100000067 |
+| Angela    | Ortiz      | 100000068 |
+| Larry     | Morgan     | 100000069 |
+| Helen     | Cooper     | 100000070 |
+| Justin    | Peterson   | 100000071 |
+| Anna      | Bailey     | 100000072 |
+| Scott     | Reed       | 100000073 |
+| Brenda    | Kelly      | 100000074 |
+| Brandon   | Howard     | 100000075 |
+| Pamela    | Ramos      | 100000076 |
+| Frank     | Kim        | 100000077 |
+| Nicole    | Foster     | 100000078 |
+| Benjamin  | Alvarado   | 100000079 |
+| Emma      | Washington | 100000080 |
+| Gregory   | Butler     | 100000081 |
+| Samantha  | Simmons    | 100000082 |
+| Samuel    | Foster     | 100000083 |
+| Katherine | Gonzales   | 100000084 |
+| Raymond   | Bryant     | 100000085 |
+| Christine | Alexander  | 100000086 |
+| Patrick   | Russell    | 100000087 |
+| Debra     | Griffin    | 100000088 |
+| Alexander | Diaz       | 100000089 |
+| Rachel    | Hayes      | 100000090 |
+| Janet     | Ford       | 100000092 |
+| Dennis    | Hamilton   | 100000093 |
+| Catherine | Graham     | 100000094 |
+| Jerry     | Sullivan   | 100000095 |
+| Maria     | Wallace    | 100000096 |
+| Tyler     | Woods      | 100000097 |
+| Heather   | Cole       | 100000098 |
+| Aaron     | West       | 100000099 |
+| Diane     | Jordan     | 100000100 |
++-----------+------------+-----------+
+39 rows in set (0.001 sec)
+
+#5 List students by name and ssn who are taking 1 courses
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn FROM StudentTable s JOIN EnrollmentTable e ON s.ssn = e.ssn GROUP BY s.ssn HAVING COUNT(e.courseID) = 1;
++-----------+----------+-----------+
+| firstName | lastName | ssn       |
++-----------+----------+-----------+
+| Charles   | Lee      | 100000021 |
+| Nancy     | Perez    | 100000022 |
+| Matthew   | Thompson | 100000023 |
+| Lisa      | White    | 100000024 |
+| Anthony   | Harris   | 100000025 |
+| Betty     | Sanchez  | 100000026 |
+| Mark      | Clark    | 100000027 |
+| Margaret  | Ramirez  | 100000028 |
+| Donald    | Lewis    | 100000029 |
+| Sandra    | Robinson | 100000030 |
+| Steven    | Walker   | 100000031 |
+| Ashley    | Young    | 100000032 |
+| Paul      | Allen    | 100000033 |
+| Dorothy   | King     | 100000034 |
+| Andrew    | Wright   | 100000035 |
+| Kimberly  | Scott    | 100000036 |
+| Joshua    | Torres   | 100000037 |
+| Emily     | Nguyen   | 100000038 |
+| Kenneth   | Hill     | 100000039 |
+| Donna     | Flores   | 100000040 |
++-----------+----------+-----------+
+20 rows in set (0.001 sec)
+
+#6 List students by name and ssn who are taking 0 courses
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn FROM StudentTable s LEFT JOIN EnrollmentTable e ON s.ssn = e.ssn WHERE e.courseID IS NULL;
++-----------+----------+-----------+
+| firstName | lastName | ssn       |
++-----------+----------+-----------+
+| Jason     | Gomez    | 100000051 |
+| Jack      | Myers    | 100000091 |
++-----------+----------+-----------+
+2 rows in set (0.003 sec)
+
+#7 Give a count of 4 credit courses by subjectID (# of 4-credit courses in each subject)
+MariaDB [mynewpaltz]> SELECT subjectId, COUNT(*) AS num_4_credit_courses FROM CourseTable WHERE numOfCredits = 4 GROUP BY subjectId;
++-----------+----------------------+
+| subjectId | num_4_credit_courses |
++-----------+----------------------+
+| CS        |                    2 |
+| ENGR      |                    2 |
+| MATH      |                    2 |
++-----------+----------------------+
+3 rows in set (0.007 sec)
+
+#8 Give a count of 3 credit courses by subjectID
+MariaDB [mynewpaltz]> SELECT subjectId, COUNT(*) AS num_3_credit_courses FROM CourseTable WHERE numOfCredits = 3 GROUP BY subjectId;
++-----------+----------------------+
+| subjectId | num_3_credit_courses |
++-----------+----------------------+
+| CS        |                    3 |
+| ENGL      |                    5 |
+| ENGR      |                    2 |
+| MATH      |                    3 |
++-----------+----------------------+
+4 rows in set (0.001 sec)
+
+#9 Give a count of 2 credit courses by subjectID
+MariaDB [mynewpaltz]> SELECT subjectId, COUNT(*) AS num_2_credit_courses FROM CourseTable WHERE numOfCredits = 2 GROUP BY subjectId;
++-----------+----------------------+
+| subjectId | num_2_credit_courses |
++-----------+----------------------+
+| ENGR      |                    1 |
++-----------+----------------------+
+1 row in set (0.001 sec)
+
+#10 Are there any 5 credit courses?Are there any 1 credit courses?
+MariaDB [mynewpaltz]> SELECT numOfCredits, COUNT(*) AS how_many FROM CourseTable WHERE numOfCredits IN (1, 5) GROUP BY numOfCredits;
+Empty set (0.002 sec)
+
+#11 List all enrolled students by name and their grades in each enrolled course
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn, c.subjectId, c.courseNumber, e.grade FROM EnrollmentTable e JOIN StudentTable s ON e.ssn = s.ssn JOIN CourseTable c ON e.courseID = c.courseID ORDER BY s.lastName, s.firstName;
++-------------+------------+-----------+-----------+--------------+-------+
+| firstName   | lastName   | ssn       | subjectId | courseNumber | grade |
++-------------+------------+-----------+-----------+--------------+-------+
+| Michelle    | Adams      | 100000042 | CS        |          315 | C     |
+| Michelle    | Adams      | 100000042 | CS        |          402 | B     |
+| Michelle    | Adams      | 100000042 | CS        |          101 | B     |
+| Michelle    | Adams      | 100000042 | CS        |          450 | A     |
+| Michelle    | Adams      | 100000042 | CS        |          210 | A     |
+| Christine   | Alexander  | 100000086 | ENGL      |          415 | A     |
+| Christine   | Alexander  | 100000086 | CS        |          450 | C     |
+| Paul        | Allen      | 100000033 | ENGL      |          205 | A     |
+| Benjamin    | Alvarado   | 100000079 | MATH      |          201 | A     |
+| Benjamin    | Alvarado   | 100000079 | CS        |          315 | C     |
+| Joseph      | Anderson   | 100000015 | ENGL      |          415 | A     |
+| Joseph      | Anderson   | 100000015 | ENGR      |          410 | B     |
+| Joseph      | Anderson   | 100000015 | MATH      |          405 | A     |
+| Anna        | Bailey     | 100000072 | MATH      |          101 | B     |
+| Anna        | Bailey     | 100000072 | ENGR      |          100 | B     |
+| Carol       | Baker      | 100000044 | ENGR      |          202 | B     |
+| Carol       | Baker      | 100000044 | ENGR      |          100 | A     |
+| Carol       | Baker      | 100000044 | ENGR      |          305 | A     |
+| Carol       | Baker      | 100000044 | ENGR      |          201 | C     |
+| Carol       | Baker      | 100000044 | ENGR      |          410 | B     |
+| Patricia    | Brown      | 100000004 | MATH      |          300 | B     |
+| Patricia    | Brown      | 100000004 | CS        |          402 | B     |
+| Patricia    | Brown      | 100000004 | ENGL      |          310 | A     |
+| Raymond     | Bryant     | 100000085 | CS        |          402 | A     |
+| Raymond     | Bryant     | 100000085 | ENGL      |          310 | C     |
+| Gregory     | Butler     | 100000081 | CS        |          450 | B     |
+| Gregory     | Butler     | 100000081 | MATH      |          405 | B     |
+| Ronald      | Campbell   | 100000047 | ENGR      |          305 | A     |
+| Ronald      | Campbell   | 100000047 | ENGR      |          201 | B     |
+| Ronald      | Campbell   | 100000047 | ENGL      |          415 | A     |
+| Ronald      | Campbell   | 100000047 | ENGL      |          101 | C     |
+| Ronald      | Campbell   | 100000047 | ENGL      |          205 | B     |
+| Timothy     | Carter     | 100000049 | CS        |          450 | C     |
+| Timothy     | Carter     | 100000049 | ENGL      |          205 | B     |
+| Timothy     | Carter     | 100000049 | CS        |          210 | A     |
+| Timothy     | Carter     | 100000049 | MATH      |          300 | B     |
+| Timothy     | Carter     | 100000049 | MATH      |          101 | A     |
+| Mark        | Clark      | 100000027 | CS        |          210 | A     |
+| Heather     | Cole       | 100000098 | CS        |          210 | A     |
+| Heather     | Cole       | 100000098 | MATH      |          102 | C     |
+| Gary        | Collins    | 100000059 | MATH      |          201 | C     |
+| Gary        | Collins    | 100000059 | ENGR      |          410 | B     |
+| Gary        | Collins    | 100000059 | ENGL      |          101 | B     |
+| Gary        | Collins    | 100000059 | ENGL      |          310 | B     |
+| Gary        | Collins    | 100000059 | ENGR      |          201 | A     |
+| Stephen     | Cook       | 100000065 | CS        |          402 | C     |
+| Stephen     | Cook       | 100000065 | ENGL      |          310 | A     |
+| Helen       | Cooper     | 100000070 | ENGL      |          310 | A     |
+| Helen       | Cooper     | 100000070 | ENGR      |          305 | C     |
+| Jacob       | Cruz       | 100000057 | ENGL      |          415 | B     |
+| Jacob       | Cruz       | 100000057 | ENGR      |          202 | A     |
+| Jacob       | Cruz       | 100000057 | CS        |          402 | A     |
+| Jacob       | Cruz       | 100000057 | ENGL      |          102 | C     |
+| Linda       | Davis      | 100000008 | MATH      |          201 | C     |
+| Linda       | Davis      | 100000008 | ENGR      |          202 | A     |
+| Linda       | Davis      | 100000008 | CS        |          315 | A     |
+| Alexander   | Diaz       | 100000089 | ENGR      |          202 | A     |
+| Alexander   | Diaz       | 100000089 | ENGL      |          205 | C     |
+| Ryan        | Diaz       | 100000055 | ENGR      |          100 | A     |
+| Ryan        | Diaz       | 100000055 | CS        |          450 | C     |
+| Ryan        | Diaz       | 100000055 | ENGL      |          205 | B     |
+| Ryan        | Diaz       | 100000055 | ENGR      |          305 | B     |
+| Ryan        | Diaz       | 100000055 | CS        |          210 | A     |
+| Sharon      | Edwards    | 100000058 | ENGR      |          100 | B     |
+| Sharon      | Edwards    | 100000058 | CS        |          450 | C     |
+| Sharon      | Edwards    | 100000058 | ENGL      |          205 | A     |
+| Sharon      | Edwards    | 100000058 | ENGR      |          305 | C     |
+| Sharon      | Edwards    | 100000058 | MATH      |          102 | A     |
+| Jeffrey     | Evans      | 100000053 | ENGL      |          101 | C     |
+| Jeffrey     | Evans      | 100000053 | ENGL      |          310 | B     |
+| Jeffrey     | Evans      | 100000053 | ENGR      |          201 | A     |
+| Jeffrey     | Evans      | 100000053 | MATH      |          405 | B     |
+| Jeffrey     | Evans      | 100000053 | CS        |          315 | A     |
+| Donna       | Flores     | 100000040 | ENGR      |          410 | B     |
+| Janet       | Ford       | 100000092 | ENGR      |          100 | C     |
+| Janet       | Ford       | 100000092 | MATH      |          101 | A     |
+| Nicole      | Foster     | 100000078 | MATH      |          102 | B     |
+| Nicole      | Foster     | 100000078 | CS        |          210 | B     |
+| Samuel      | Foster     | 100000083 | ENGL      |          102 | A     |
+| Samuel      | Foster     | 100000083 | CS        |          210 | C     |
+| Jennifer    | Garcia     | 100000006 | MATH      |          101 | B     |
+| Jennifer    | Garcia     | 100000006 | ENGR      |          100 | A     |
+| Jennifer    | Garcia     | 100000006 | CS        |          101 | C     |
+| Katherine   | Gonzales   | 100000084 | ENGL      |          205 | B     |
+| Katherine   | Gonzales   | 100000084 | CS        |          315 | B     |
+| Richard     | Gonzalez   | 100000013 | MATH      |          201 | B     |
+| Richard     | Gonzalez   | 100000013 | ENGL      |          205 | A     |
+| Richard     | Gonzalez   | 100000013 | ENGR      |          202 | A     |
+| Catherine   | Graham     | 100000094 | ENGR      |          202 | A     |
+| Catherine   | Graham     | 100000094 | MATH      |          201 | C     |
+| Kevin       | Green      | 100000041 | MATH      |          101 | A     |
+| Kevin       | Green      | 100000041 | MATH      |          102 | B     |
+| Kevin       | Green      | 100000041 | MATH      |          201 | A     |
+| Kevin       | Green      | 100000041 | MATH      |          405 | B     |
+| Kevin       | Green      | 100000041 | MATH      |          300 | C     |
+| Debra       | Griffin    | 100000088 | ENGR      |          201 | C     |
+| Debra       | Griffin    | 100000088 | ENGL      |          102 | A     |
+| Jonathan    | Gutierrez  | 100000067 | ENGR      |          100 | C     |
+| Jonathan    | Gutierrez  | 100000067 | ENGL      |          101 | A     |
+| Edward      | Hall       | 100000045 | MATH      |          101 | B     |
+| Edward      | Hall       | 100000045 | MATH      |          201 | B     |
+| Edward      | Hall       | 100000045 | CS        |          210 | C     |
+| Edward      | Hall       | 100000045 | MATH      |          405 | A     |
+| Edward      | Hall       | 100000045 | CS        |          402 | A     |
+| Dennis      | Hamilton   | 100000093 | MATH      |          102 | B     |
+| Dennis      | Hamilton   | 100000093 | ENGR      |          201 | B     |
+| Anthony     | Harris     | 100000025 | MATH      |          405 | B     |
+| Rachel      | Hayes      | 100000090 | ENGR      |          305 | B     |
+| Rachel      | Hayes      | 100000090 | ENGL      |          310 | B     |
+| William     | Hernandez  | 100000011 | ENGL      |          101 | B     |
+| William     | Hernandez  | 100000011 | ENGR      |          100 | A     |
+| William     | Hernandez  | 100000011 | MATH      |          101 | B     |
+| Kenneth     | Hill       | 100000039 | ENGR      |          305 | A     |
+| Brandon     | Howard     | 100000075 | ENGR      |          305 | B     |
+| Brandon     | Howard     | 100000075 | MATH      |          300 | B     |
+| Christopher | Jackson    | 100000019 | ENGL      |          310 | A     |
+| Christopher | Jackson    | 100000019 | MATH      |          300 | B     |
+| Christopher | Jackson    | 100000019 | CS        |          402 | A     |
+| Mary        | Johnson    | 100000002 | MATH      |          102 | B     |
+| Mary        | Johnson    | 100000002 | ENGL      |          102 | B     |
+| Mary        | Johnson    | 100000002 | CS        |          210 | C     |
+| John        | Jones      | 100000005 | CS        |          450 | A     |
+| John        | Jones      | 100000005 | ENGL      |          415 | B     |
+| John        | Jones      | 100000005 | MATH      |          405 | C     |
+| Diane       | Jordan     | 100000100 | MATH      |          300 | A     |
+| Diane       | Jordan     | 100000100 | CS        |          402 | C     |
+| Brenda      | Kelly      | 100000074 | ENGR      |          202 | C     |
+| Brenda      | Kelly      | 100000074 | MATH      |          201 | A     |
+| Frank       | Kim        | 100000077 | MATH      |          101 | C     |
+| Frank       | Kim        | 100000077 | CS        |          101 | A     |
+| Dorothy     | King       | 100000034 | ENGL      |          310 | B     |
+| Charles     | Lee        | 100000021 | MATH      |          101 | A     |
+| Donald      | Lewis      | 100000029 | CS        |          402 | C     |
+| Barbara     | Lopez      | 100000012 | ENGR      |          201 | B     |
+| Barbara     | Lopez      | 100000012 | MATH      |          102 | A     |
+| Barbara     | Lopez      | 100000012 | ENGL      |          102 | C     |
+| Karen       | Martin     | 100000020 | ENGL      |          415 | B     |
+| Karen       | Martin     | 100000020 | MATH      |          405 | C     |
+| Karen       | Martin     | 100000020 | CS        |          450 | B     |
+| Elizabeth   | Martinez   | 100000010 | CS        |          450 | C     |
+| Elizabeth   | Martinez   | 100000010 | ENGR      |          410 | A     |
+| Elizabeth   | Martinez   | 100000010 | MATH      |          405 | A     |
+| Michael     | Miller     | 100000007 | ENGR      |          201 | B     |
+| Michael     | Miller     | 100000007 | MATH      |          102 | A     |
+| Michael     | Miller     | 100000007 | CS        |          210 | B     |
+| Melissa     | Mitchell   | 100000048 | ENGR      |          100 | C     |
+| Melissa     | Mitchell   | 100000048 | ENGL      |          102 | B     |
+| Melissa     | Mitchell   | 100000048 | ENGL      |          310 | A     |
+| Melissa     | Mitchell   | 100000048 | ENGR      |          410 | B     |
+| Melissa     | Mitchell   | 100000048 | ENGR      |          202 | A     |
+| Sarah       | Moore      | 100000018 | MATH      |          201 | A     |
+| Sarah       | Moore      | 100000018 | ENGL      |          205 | C     |
+| Sarah       | Moore      | 100000018 | CS        |          315 | C     |
+| Eric        | Morales    | 100000063 | ENGL      |          102 | C     |
+| Eric        | Morales    | 100000063 | CS        |          210 | B     |
+| Larry       | Morgan     | 100000069 | ENGL      |          205 | B     |
+| Larry       | Morgan     | 100000069 | ENGR      |          202 | B     |
+| Kathleen    | Morris     | 100000062 | ENGL      |          101 | A     |
+| Kathleen    | Morris     | 100000062 | CS        |          101 | C     |
+| Amy         | Murphy     | 100000064 | ENGL      |          205 | B     |
+| Amy         | Murphy     | 100000064 | CS        |          315 | A     |
+| Brian       | Nelson     | 100000043 | ENGL      |          102 | B     |
+| Brian       | Nelson     | 100000043 | ENGL      |          415 | C     |
+| Brian       | Nelson     | 100000043 | ENGL      |          101 | C     |
+| Brian       | Nelson     | 100000043 | ENGL      |          310 | A     |
+| Brian       | Nelson     | 100000043 | ENGL      |          205 | A     |
+| Emily       | Nguyen     | 100000038 | ENGR      |          202 | C     |
+| Angela      | Ortiz      | 100000068 | ENGL      |          102 | C     |
+| Angela      | Ortiz      | 100000068 | ENGR      |          201 | A     |
+| Laura       | Parker     | 100000056 | CS        |          315 | B     |
+| Laura       | Parker     | 100000056 | ENGR      |          410 | C     |
+| Laura       | Parker     | 100000056 | ENGL      |          101 | A     |
+| Laura       | Parker     | 100000056 | ENGL      |          310 | C     |
+| Laura       | Parker     | 100000056 | ENGR      |          201 | A     |
+| Nancy       | Perez      | 100000022 | MATH      |          102 | B     |
+| Justin      | Peterson   | 100000071 | ENGR      |          410 | A     |
+| Justin      | Peterson   | 100000071 | ENGL      |          415 | C     |
+| Stephanie   | Phillips   | 100000052 | CS        |          450 | C     |
+| Stephanie   | Phillips   | 100000052 | ENGL      |          205 | A     |
+| Stephanie   | Phillips   | 100000052 | CS        |          210 | B     |
+| Stephanie   | Phillips   | 100000052 | MATH      |          300 | A     |
+| Stephanie   | Phillips   | 100000052 | ENGR      |          100 | B     |
+| Margaret    | Ramirez    | 100000028 | CS        |          315 | B     |
+| Pamela      | Ramos      | 100000076 | MATH      |          405 | C     |
+| Pamela      | Ramos      | 100000076 | ENGR      |          410 | A     |
+| Scott       | Reed       | 100000073 | ENGR      |          201 | A     |
+| Scott       | Reed       | 100000073 | MATH      |          102 | C     |
+| Cynthia     | Reyes      | 100000060 | MATH      |          300 | B     |
+| Cynthia     | Reyes      | 100000060 | ENGR      |          202 | B     |
+| Cynthia     | Reyes      | 100000060 | MATH      |          101 | A     |
+| Cynthia     | Reyes      | 100000060 | ENGL      |          102 | A     |
+| Cynthia     | Reyes      | 100000060 | ENGL      |          415 | C     |
+| Amanda      | Rivera     | 100000046 | CS        |          101 | B     |
+| Amanda      | Rivera     | 100000046 | MATH      |          102 | A     |
+| Amanda      | Rivera     | 100000046 | MATH      |          300 | A     |
+| Amanda      | Rivera     | 100000046 | CS        |          315 | B     |
+| Deborah     | Roberts    | 100000050 | ENGL      |          101 | B     |
+| Deborah     | Roberts    | 100000050 | ENGL      |          310 | A     |
+| Deborah     | Roberts    | 100000050 | MATH      |          405 | C     |
+| Deborah     | Roberts    | 100000050 | CS        |          315 | A     |
+| Deborah     | Roberts    | 100000050 | MATH      |          102 | B     |
+| Sandra      | Robinson   | 100000030 | CS        |          450 | A     |
+| David       | Rodriguez  | 100000009 | ENGR      |          305 | C     |
+| David       | Rodriguez  | 100000009 | MATH      |          300 | B     |
+| David       | Rodriguez  | 100000009 | CS        |          402 | B     |
+| Shirley     | Rogers     | 100000066 | CS        |          450 | B     |
+| Shirley     | Rogers     | 100000066 | ENGL      |          415 | B     |
+| Patrick     | Russell    | 100000087 | ENGR      |          100 | B     |
+| Patrick     | Russell    | 100000087 | ENGL      |          101 | B     |
+| Betty       | Sanchez    | 100000026 | CS        |          101 | C     |
+| Kimberly    | Scott      | 100000036 | ENGR      |          100 | A     |
+| Samantha    | Simmons    | 100000082 | CS        |          101 | A     |
+| Samantha    | Simmons    | 100000082 | ENGL      |          101 | C     |
+| James       | Smith      | 100000001 | CS        |          101 | B     |
+| James       | Smith      | 100000001 | MATH      |          101 | A     |
+| James       | Smith      | 100000001 | ENGL      |          101 | A     |
+| Nicholas    | Stewart    | 100000061 | MATH      |          405 | A     |
+| Nicholas    | Stewart    | 100000061 | CS        |          450 | B     |
+| Jerry       | Sullivan   | 100000095 | MATH      |          300 | A     |
+| Jerry       | Sullivan   | 100000095 | ENGR      |          305 | C     |
+| Thomas      | Taylor     | 100000017 | ENGL      |          102 | B     |
+| Thomas      | Taylor     | 100000017 | CS        |          210 | A     |
+| Thomas      | Taylor     | 100000017 | MATH      |          102 | B     |
+| Jessica     | Thomas     | 100000016 | ENGL      |          101 | A     |
+| Jessica     | Thomas     | 100000016 | MATH      |          101 | C     |
+| Jessica     | Thomas     | 100000016 | CS        |          101 | B     |
+| Matthew     | Thompson   | 100000023 | MATH      |          201 | C     |
+| Joshua      | Torres     | 100000037 | ENGR      |          201 | B     |
+| Rebecca     | Turner     | 100000054 | ENGL      |          102 | A     |
+| Rebecca     | Turner     | 100000054 | ENGL      |          415 | B     |
+| Rebecca     | Turner     | 100000054 | ENGR      |          202 | C     |
+| Rebecca     | Turner     | 100000054 | CS        |          402 | B     |
+| Rebecca     | Turner     | 100000054 | CS        |          101 | C     |
+| Steven      | Walker     | 100000031 | ENGL      |          101 | B     |
+| Maria       | Wallace    | 100000096 | MATH      |          405 | B     |
+| Maria       | Wallace    | 100000096 | ENGR      |          410 | B     |
+| Emma        | Washington | 100000080 | CS        |          402 | A     |
+| Emma        | Washington | 100000080 | MATH      |          300 | C     |
+| Aaron       | West       | 100000099 | MATH      |          201 | B     |
+| Aaron       | West       | 100000099 | CS        |          315 | B     |
+| Lisa        | White      | 100000024 | MATH      |          300 | A     |
+| Robert      | Williams   | 100000003 | ENGL      |          205 | C     |
+| Robert      | Williams   | 100000003 | MATH      |          201 | A     |
+| Robert      | Williams   | 100000003 | CS        |          315 | A     |
+| Susan       | Wilson     | 100000014 | ENGL      |          310 | B     |
+| Susan       | Wilson     | 100000014 | MATH      |          300 | C     |
+| Susan       | Wilson     | 100000014 | ENGR      |          305 | C     |
+| Tyler       | Woods      | 100000097 | MATH      |          101 | A     |
+| Tyler       | Woods      | 100000097 | CS        |          101 | C     |
+| Andrew      | Wright     | 100000035 | ENGL      |          415 | C     |
+| Ashley      | Young      | 100000032 | ENGL      |          102 | C     |
++-------------+------------+-----------+-----------+--------------+-------+
+251 rows in set (0.006 sec)
+
+#12 For the course identified by courseID of 10, list the number of students enrolled, course number as well as subjectID
+MariaDB [mynewpaltz]> SELECT c.courseID, c.subjectId, c.courseNumber, COUNT(e.ssn) AS num_students_enrolled FROM CourseTable c LEFT JOIN EnrollmentTable e ON c.courseID = e.courseID WHERE c.courseID = 10;
++----------+-----------+--------------+-----------------------+
+| courseID | subjectId | courseNumber | num_students_enrolled |
++----------+-----------+--------------+-----------------------+
+|       10 | CS        |          450 |                    13 |
++----------+-----------+--------------+-----------------------+
+1 row in set (0.006 sec)
+
+#13 How many students are in each course (identified uniquely by courseID)?
+MariaDB [mynewpaltz]> SELECT c.courseID, c.subjectId, c.courseNumber, COUNT(e.ssn) AS num_students FROM CourseTable c LEFT JOIN EnrollmentTable e ON c.courseID = e.courseID GROUP BY c.courseID;
++----------+-----------+--------------+--------------+
+| courseID | subjectId | courseNumber | num_students |
++----------+-----------+--------------+--------------+
+|        1 | MATH      |          101 |           13 |
+|        2 | MATH      |          102 |           13 |
+|        3 | MATH      |          201 |           12 |
+|        4 | MATH      |          300 |           14 |
+|        5 | MATH      |          405 |           13 |
+|        6 | CS        |          101 |           11 |
+|        7 | CS        |          210 |           13 |
+|        8 | CS        |          315 |           13 |
+|        9 | CS        |          402 |           12 |
+|       10 | CS        |          450 |           13 |
+|       11 | ENGL      |          101 |           14 |
+|       12 | ENGL      |          102 |           13 |
+|       13 | ENGL      |          205 |           14 |
+|       14 | ENGL      |          310 |           14 |
+|       15 | ENGL      |          415 |           12 |
+|       16 | ENGR      |          100 |           12 |
+|       17 | ENGR      |          201 |           12 |
+|       18 | ENGR      |          202 |           12 |
+|       19 | ENGR      |          305 |           11 |
+|       20 | ENGR      |          410 |           10 |
++----------+-----------+--------------+--------------+
+20 rows in set (0.001 sec)
+
+#14 For each student enrolled, list the first name, last name, and number of credits that student was taking.
+MariaDB [mynewpaltz]> SELECT s.firstName, s.lastName, s.ssn, SUM(c.numOfCredits) AS total_credits FROM StudentTable s JOIN EnrollmentTable e ON s.ssn = e.ssn JOIN CourseTable c ON e.courseID = c.courseID GROUP BY s.ssn;
++-------------+------------+-----------+---------------+
+| firstName   | lastName   | ssn       | total_credits |
++-------------+------------+-----------+---------------+
+| James       | Smith      | 100000001 |            11 |
+| Mary        | Johnson    | 100000002 |            10 |
+| Robert      | Williams   | 100000003 |            10 |
+| Patricia    | Brown      | 100000004 |             9 |
+| John        | Jones      | 100000005 |             9 |
+| Jennifer    | Garcia     | 100000006 |            10 |
+| Michael     | Miller     | 100000007 |            10 |
+| Linda       | Davis      | 100000008 |            10 |
+| David       | Rodriguez  | 100000009 |            10 |
+| Elizabeth   | Martinez   | 100000010 |            10 |
+| William     | Hernandez  | 100000011 |             9 |
+| Barbara     | Lopez      | 100000012 |            10 |
+| Richard     | Gonzalez   | 100000013 |             9 |
+| Susan       | Wilson     | 100000014 |            10 |
+| Joseph      | Anderson   | 100000015 |            10 |
+| Jessica     | Thomas     | 100000016 |            11 |
+| Thomas      | Taylor     | 100000017 |            10 |
+| Sarah       | Moore      | 100000018 |            10 |
+| Christopher | Jackson    | 100000019 |             9 |
+| Karen       | Martin     | 100000020 |             9 |
+| Charles     | Lee        | 100000021 |             4 |
+| Nancy       | Perez      | 100000022 |             4 |
+| Matthew     | Thompson   | 100000023 |             3 |
+| Lisa        | White      | 100000024 |             3 |
+| Anthony     | Harris     | 100000025 |             3 |
+| Betty       | Sanchez    | 100000026 |             4 |
+| Mark        | Clark      | 100000027 |             3 |
+| Margaret    | Ramirez    | 100000028 |             4 |
+| Donald      | Lewis      | 100000029 |             3 |
+| Sandra      | Robinson   | 100000030 |             3 |
+| Steven      | Walker     | 100000031 |             3 |
+| Ashley      | Young      | 100000032 |             3 |
+| Paul        | Allen      | 100000033 |             3 |
+| Dorothy     | King       | 100000034 |             3 |
+| Andrew      | Wright     | 100000035 |             3 |
+| Kimberly    | Scott      | 100000036 |             2 |
+| Joshua      | Torres     | 100000037 |             3 |
+| Emily       | Nguyen     | 100000038 |             3 |
+| Kenneth     | Hill       | 100000039 |             4 |
+| Donna       | Flores     | 100000040 |             4 |
+| Kevin       | Green      | 100000041 |            17 |
+| Michelle    | Adams      | 100000042 |            17 |
+| Brian       | Nelson     | 100000043 |            15 |
+| Carol       | Baker      | 100000044 |            16 |
+| Edward      | Hall       | 100000045 |            16 |
+| Amanda      | Rivera     | 100000046 |            15 |
+| Ronald      | Campbell   | 100000047 |            16 |
+| Melissa     | Mitchell   | 100000048 |            15 |
+| Timothy     | Carter     | 100000049 |            16 |
+| Deborah     | Roberts    | 100000050 |            17 |
+| Stephanie   | Phillips   | 100000052 |            14 |
+| Jeffrey     | Evans      | 100000053 |            16 |
+| Rebecca     | Turner     | 100000054 |            16 |
+| Ryan        | Diaz       | 100000055 |            15 |
+| Laura       | Parker     | 100000056 |            17 |
+| Jacob       | Cruz       | 100000057 |            12 |
+| Sharon      | Edwards    | 100000058 |            16 |
+| Gary        | Collins    | 100000059 |            16 |
+| Cynthia     | Reyes      | 100000060 |            16 |
+| Nicholas    | Stewart    | 100000061 |             6 |
+| Kathleen    | Morris     | 100000062 |             7 |
+| Eric        | Morales    | 100000063 |             6 |
+| Amy         | Murphy     | 100000064 |             7 |
+| Stephen     | Cook       | 100000065 |             6 |
+| Shirley     | Rogers     | 100000066 |             6 |
+| Jonathan    | Gutierrez  | 100000067 |             5 |
+| Angela      | Ortiz      | 100000068 |             6 |
+| Larry       | Morgan     | 100000069 |             6 |
+| Helen       | Cooper     | 100000070 |             7 |
+| Justin      | Peterson   | 100000071 |             7 |
+| Anna        | Bailey     | 100000072 |             6 |
+| Scott       | Reed       | 100000073 |             7 |
+| Brenda      | Kelly      | 100000074 |             6 |
+| Brandon     | Howard     | 100000075 |             7 |
+| Pamela      | Ramos      | 100000076 |             7 |
+| Frank       | Kim        | 100000077 |             8 |
+| Nicole      | Foster     | 100000078 |             7 |
+| Benjamin    | Alvarado   | 100000079 |             7 |
+| Emma        | Washington | 100000080 |             6 |
+| Gregory     | Butler     | 100000081 |             6 |
+| Samantha    | Simmons    | 100000082 |             7 |
+| Samuel      | Foster     | 100000083 |             6 |
+| Katherine   | Gonzales   | 100000084 |             7 |
+| Raymond     | Bryant     | 100000085 |             6 |
+| Christine   | Alexander  | 100000086 |             6 |
+| Patrick     | Russell    | 100000087 |             5 |
+| Debra       | Griffin    | 100000088 |             6 |
+| Alexander   | Diaz       | 100000089 |             6 |
+| Rachel      | Hayes      | 100000090 |             7 |
+| Janet       | Ford       | 100000092 |             6 |
+| Dennis      | Hamilton   | 100000093 |             7 |
+| Catherine   | Graham     | 100000094 |             6 |
+| Jerry       | Sullivan   | 100000095 |             7 |
+| Maria       | Wallace    | 100000096 |             7 |
+| Tyler       | Woods      | 100000097 |             8 |
+| Heather     | Cole       | 100000098 |             7 |
+| Aaron       | West       | 100000099 |             7 |
+| Diane       | Jordan     | 100000100 |             6 |
++-------------+------------+-----------+---------------+
+98 rows in set (0.004 sec)
+
+MariaDB [mynewpaltz]>
