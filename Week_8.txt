@@ -68,3 +68,93 @@ public class DisplayCountries {
         }
     }
 }
+
+terminal output for "German" and "English": 
+
+Enter a language: German 
+Connected to nation database!
+Countries where "German" is spoken:
+- Australia - unofficial
+- Austria - official
+- Belgium - official
+- Brazil - unofficial
+- Canada - unofficial
+- Switzerland - official
+- Czech Republic - unofficial
+- Germany - official
+- Denmark - unofficial
+- Hungary - unofficial
+- Italy - unofficial
+- Kazakstan - unofficial
+- Liechtenstein - official
+- Luxembourg - official
+- Namibia - unofficial
+- Poland - unofficial
+- Paraguay - unofficial
+- Romania - unofficial
+- United States - unofficial
+PS C:\Users\foyje\Downloads\Java> java -cp ".;mariadb-java-client-3.5.7.jar" DisplayCountries;     
+Enter a language: English
+Connected to nation database!
+Countries where "English" is spoken:
+- Aruba - unofficial
+- Anguilla - official
+- Netherlands Antilles - unofficial
+- American Samoa - official
+- Antigua and Barbuda - official
+- Australia - official
+- Bahrain - unofficial
+- Belize - official
+- Bermuda - official
+- Barbados - official
+- Brunei - unofficial
+- Canada - official
+- Cocos (Keeling) Islands - official
+- Cook Islands - unofficial
+- Christmas Island - official
+- Cayman Islands - official
+- Denmark - unofficial
+- Falkland Islands - official
+- United Kingdom - official
+- Gibraltar - official
+- Guam - official
+- Hong Kong - official
+- Ireland - official
+- Iceland - unofficial
+- Japan - unofficial
+- Saint Kitts and Nevis - official
+- Kuwait - unofficial
+- Saint Lucia - official
+- Lesotho - official
+- Macao - unofficial
+- Monaco - unofficial
+- Maldives - unofficial
+- Marshall Islands - official
+- Malta - official
+- Northern Mariana Islands - official
+- Montserrat - official
+- Malaysia - unofficial
+- Norfolk Island - official
+- Niue - official
+- Norway - unofficial
+- Nauru - official
+- New Zealand - official
+- Palau - official
+- Puerto Rico - unofficial
+- Saint Helena - official
+- Seychelles - official
+- Turks and Caicos Islands - official
+- Tokelau - official
+- Tonga - official
+- Trinidad and Tobago - unofficial
+- Tuvalu - official
+- United States Minor Outlying Islands - official
+- United States - official
+- Saint Vincent and the Grenadines - official
+- Virgin Islands, British - official
+- Virgin Islands, U.S. - official
+- Vanuatu - official
+- Samoa - official
+- South Africa - official
+- Zimbabwe - official
+PS C:\Users\foyje\Downloads\Java>
