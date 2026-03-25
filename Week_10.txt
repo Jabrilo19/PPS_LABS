@@ -1,0 +1,79 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.*;
+import java.util.function.*;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Week10_labs
+{
+    public static void main(String[] args)
+	{
+        List<String> fruit = Arrays.asList("cherry","banana","berry","apple","cherry","kiwi","fig","date","lemon","honeydew","cherry","elderberry","apple","banana","grape");
+
+		// Collect elements into a Set
+        Set<String> fruitSet = fruit.stream().collect(Collectors.toSet());
+        System.out.println(fruitSet);
+
+        // Collect the fruit into groups based on their first character
+        Map<Character, List<String>> byFirstChar = fruit.stream().collect(Collectors.groupingBy(s -> s.charAt(0)));
+        System.out.println(byFirstChar);
+
+		// Group fruit by the length of the name
+        Map<Integer, List<String>> byLength = fruit.stream().collect(Collectors.groupingBy(String::length));
+        System.out.println(byLength);
+
+		//Collect the fruit that has erry in it
+        List<String> withErry = fruit.stream().filter(s -> s.contains("erry")).collect(Collectors.toList());
+        System.out.println(withErry);
+
+		//Create a partition of fruit based on if it contains erry
+        Map<Boolean, List<String>> partitionErry = fruit.stream().collect(Collectors.partitioningBy(s -> s.contains("erry")));
+        System.out.println(partitionErry);
+
+		//collect the fruit that has 5 or less symbols
+        List<String> shortFruit = fruit.stream().filter(s -> s.length() <= 5).collect(Collectors.toList());
+        System.out.println(shortFruit);
+
+		//find the total number of symbols in all the fruit stored
+        int totalChars = fruit.stream().mapToInt(String::length).sum();
+        System.out.println(totalChars);
+
+
+		List<Integer> data = Arrays.asList(87, 23, 45, 100, 6, 78, 92, 44, 13, 56, 34, 99, 82, 19, 1012, 78, 45, 90, 23, 56, 78, 100, 3, 43, 67, 89, 21, 34, 10);
+
+        // Partition data based on if >=50
+        Map<Boolean, List<Integer>> partition50 = data.stream().collect(Collectors.partitioningBy(n -> n >= 50));
+        System.out.println(partition50);
+
+		//divide data into groups based on the remainder when divided by 7
+        Map<Integer, List<Integer>> mod7 = data.stream().collect(Collectors.groupingBy(n -> n % 7));
+        System.out.println(mod7);
+
+		//find the sum of the data
+        int sum = data.stream().mapToInt(Integer::intValue).sum();
+        System.out.println(sum);
+
+		//collect the unique values
+        Set<Integer> unique = data.stream().collect(Collectors.toSet());
+        System.out.println(unique);
+
+        //compute the cube of each values
+        List<Integer> cubes = data.stream().map(n -> n * n * n).collect(Collectors.toList());
+        System.out.println(cubes);
+
+		//find the sum of the cubes of each value
+        int sumCubes = data.stream().map(n -> n * n * n).reduce(0, Integer::sum);
+        System.out.println(sumCubes);
+
+		//increase the value of each element by 5
+        List<Integer> plusFive = data.stream().map(n -> n + 5).collect(Collectors.toList());
+        System.out.println(plusFive);
+
+		//compute the cube of the even values
+        List<Integer> evenCubes = data.stream().filter(n -> n % 2 == 0).map(n -> n * n * n).collect(Collectors.toList());
+        System.out.println(evenCubes);
+
+   }
+}
