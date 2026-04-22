@@ -1,0 +1,124 @@
+import java.sql.*;
+import java.util.*;
+import java.util.Arrays;
+import java.util.function.*;
+import java.util.stream.Collectors;
+
+public class Week13_Lab {
+
+    public static void main(String[] args) {
+        
+        // 1: Use the jdbc connection to retrieve id, name, and salary and populate the List<Employee> employeesList
+        List<Employee> employeesList = new ArrayList<>();
+        
+        // atabase credentials and URL
+        String url = "jdbc:mariadb://localhost:3306/employee"; 
+        String user = "root";
+        String password = "1026";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT id, name, salary FROM employees")) {
+
+            // Loop through the result set and create Employee objects -> populate list
+            while (rs.next()) {
+                employeesList.add(new Employee(
+                    rs.getInt("id"), 
+                    rs.getString("name"), 
+                    rs.getDouble("salary")
+                ));
+            }
+            //add a check so I know everything connected or not
+            System.out.println("Successfully loaded from database.");
+            
+        } catch (SQLException e) {
+            System.out.println("DB Connection failed.");
+            e.printStackTrace();
+        }
+
+        // 2: Print a list of all Employees using Functional Interfaces
+        // add a header
+        System.out.println("\n--- Problem 2: All Employees ---");
+
+        //print out every employee
+        employeesList.forEach(emp -> System.out.println(emp));
+
+
+       
+        // 3: Define a Predicate to filter employees with salary > $50000.
+
+        // Apply this Predicate to filter the List to get highEarners.
+        // A Predicate returns true or false -> use it to sort.
+        Predicate<Employee> isHighEarner = emp -> emp.getSalary() > 50000;
+        
+        List<Employee> highEarners = employeesList.stream()
+                .filter(isHighEarner)
+                .collect(Collectors.toList());
+
+
+        
+        // 4: Print the list of highEarners you just made
+        System.out.println("\n--- Problem 4: High Earners (> $50k) ---");
+        highEarners.forEach(highE -> System.out.println(highE));
+
+
+        // 5: Write a Function<Employee, Employee> to apply 15% tax to highEarners. Returns an Employee with adjusted salary.
+        // A Function takes one type and either returns the same or another type 
+        
+        //get salary -> * it by .85 for the 15% tax
+        Function<Employee, Employee> applyTax = emp -> 
+            new Employee(emp.getId(), emp.getName(), emp.getSalary() * 0.85);
+
+
+        // 6: Create a Function<Employee, String> named formatSalary 
+        // to format the salary to 2 decimal places with $ attached.
+       
+        Function<Employee, String> formatSalary = emp -> 
+            String.format("$%.2f", emp.getSalary());
+
+
+        // 7: Stream employeeList, filter, apply tax, format and 
+        // create a List<Employee> of highEarners with new salaries.
+
+        System.out.println("\n--- Problem 7: Taxed High Earners ---");
+        
+        // Create the new list with filter and Apply Tax
+        List<Employee> taxedHighEarners = employeesList.stream()
+                .filter(isHighEarner)     // Keep only those > 50k
+                .map(applyTax)            // Apply the 15% tax reduction
+                .collect(Collectors.toList()); // Collect into a new List<Employee>
+
+        //Loop through the list to format and print
+        taxedHighEarners.forEach(emp -> 
+            System.out.println(emp.getName() + " new salary: " + formatSalary.apply(emp))
+        );
+
+
+        // 8 (Extra): Single sequence, apply 10%/15% tax, and format string to show names and salaries 
+
+        System.out.println("\n--- Problem 8: Partitioned & Taxed Summaries ---");
+        
+        // Define the function to calculate the variable tax and format the string beforehand
+        Function<Employee, String> applyTaxAndFormat = emp -> {
+            // Ternary operator to decide tax rate based on current salary
+            double rate = emp.getSalary() > 50000 ? 0.85 : 0.90; // true(above) gets 15% and false(under) gets 10%
+            double finalSalary = emp.getSalary() * rate; // times the salary by the tax rate
+            return String.format("%s: $%.2f", emp.getName(), finalSalary); // format it
+        };
+
+        // the single sequence 
+        Map<Boolean, List<String>> taxedSummaries = employeesList.stream()
+                .collect(Collectors.partitioningBy(
+                        isHighEarner,
+                        Collectors.mapping(applyTaxAndFormat, Collectors.toList())
+                ));
+
+        // Print the results
+        System.out.println("High Earners (15% Tax Applied):");
+        taxedSummaries.get(true).forEach(summary -> System.out.println(summary));
+        
+        System.out.println("\nStandard Earners (10% Tax Applied):");
+        taxedSummaries.get(false).forEach(summary -> System.out.println(summary));   
+    
+    }
+}
