@@ -1,0 +1,160 @@
+import java.util.Random;
+
+public class Week14_Lab {
+
+    public static void main(String[] args) throws InterruptedException {
+        
+        // 1a: Use the Runnable interface to calculate sum from 1 to 100
+        // add a header
+        System.out.println("\n--- Problem 1a: Runnable Sum ---");
+        
+        // create the task and pass it to a thread
+        RunnableSum task = new RunnableSum();
+        Thread threadA = new Thread(task);
+        
+        // start and join the thread
+        threadA.start();
+        threadA.join(); 
+        
+        System.out.println("Result: " + task.getSum());
+
+
+        // 1b: Create a class that extends Thread to calculate sum from 1 to 100
+        System.out.println("\n--- Problem 1b: Thread Sum ---");
+        
+        ThreadSum threadB = new ThreadSum();
+        
+        // start and join the thread
+        threadB.start();
+        threadB.join();
+        
+        System.out.println("Result: " + threadB.getSum());
+
+
+        // 2: Shared Counter with a synchronized increment method
+        System.out.println("\n--- Problem 2: Synchronized Counter ---");
+        
+        Counter sharedCounter = new Counter();
+        Thread[] threads = new Thread[10];
+
+        // Start 10 threads that each increment 1,000 times
+        for (int i = 0; i < 10; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < 1000; j++) {
+                    sharedCounter.increment();
+                }
+            });
+            threads[i].start();
+        }
+
+        // main thread joins the created threads after starting
+        for (int i = 0; i < 10; i++) {
+            threads[i].join();
+        }
+        
+        // Print final output of counter -> should be 10000
+        System.out.println("Final Counter Value: " + sharedCounter.getCount());
+
+
+        // 3: takes an integer, n, as command line argument and times sum of squares
+        System.out.println("\n--- Problem 3: Timing Sum of Squares ---");
+        
+        // check if n was passed in -> if not run the loop for graphing
+        if (args.length > 0) {
+            int n = Integer.parseInt(args[0]);
+            runBenchmark(n);
+        } else {
+            // keep increasing its value by a factor of 10 up to 100,000,000
+            for (int n = 100; n <= 100_000_000; n *= 10) {
+                runBenchmark(n);
+            }
+        }
+    }
+
+    // helper method to do the array math and time it
+    static void runBenchmark(int n) {
+        // create an array of n small integers (between 1 and 100)
+        int[] array = new int[n];
+        java.util.Random rand = new java.util.Random();
+        for (int i = 0; i < n; i++) {
+            array[i] = rand.nextInt(100) + 1;
+        }
+
+        // Method 1: using a standard loop
+        long startTimeSeq = System.nanoTime();
+        long sumSeq = 0;
+        for (int i = 0; i < n; i++) {
+            sumSeq += (long) array[i] * array[i];
+        }
+        long durationSeq = System.nanoTime() - startTimeSeq;
+
+        // Method 2: parallel Streams
+        long startTimeThreaded = System.nanoTime();
+        long sumThreaded = java.util.Arrays.stream(array)
+                .parallel()
+                .mapToLong(i -> (long) i * i)
+                .sum();
+        long durationThreaded = System.nanoTime() - startTimeThreaded;
+
+        // Print out the times and the sums to prevent the compiler from skipping the last few loops
+        System.out.printf("n = %-10d | Loop Time: %6.2f ms | Thread Time: %6.2f ms | Match: %b\n", 
+                n, 
+                durationSeq / 1_000_000.0, 
+                durationThreaded / 1_000_000.0,
+                (sumSeq == sumThreaded));
+    }
+    // Class for problem 1
+    
+    static class RunnableSum implements Runnable {
+        private int sum = 0;
+        
+        public void run() {
+            for (int i = 1; i <= 100; i++) {
+                sum += i;
+            }
+        }
+        public int getSum() { return sum; }
+    }
+
+    static class ThreadSum extends Thread {
+        private int sum = 0;
+        
+        public void run() {
+            for (int i = 1; i <= 100; i++) {
+                sum += i;
+            }
+        }
+        public int getSum() { return sum; }
+    }
+
+    // Class for Problem 2 
+    
+    static class Counter {
+        private int count = 0;
+        
+        // synchronized increment method
+        public synchronized void increment() {
+            count++;
+        }
+        public int getCount() { return count; }
+    }
+}
+
+--- Problem 1a: Runnable Sum ---
+Result: 5050
+
+--- Problem 1b: Thread Sum ---
+Result: 5050
+
+--- Problem 2: Synchronized Counter ---
+Final Counter Value: 10000
+
+--- Problem 3: Timing Sum of Squares ---
+n = 100        | Loop Time:   0.00 ms | Thread Time:  18.67 ms | Match: true
+n = 1000       | Loop Time:   0.02 ms | Thread Time:   2.13 ms | Match: true
+n = 10000      | Loop Time:   0.20 ms | Thread Time:   2.00 ms | Match: true
+n = 100000     | Loop Time:   0.29 ms | Thread Time:   3.53 ms | Match: true
+n = 1000000    | Loop Time:   3.51 ms | Thread Time:  33.40 ms | Match: true
+n = 10000000   | Loop Time:   4.74 ms | Thread Time:   2.26 ms | Match: true
+n = 100000000  | Loop Time:  46.13 ms | Thread Time:  18.85 ms | Match: true
+PS C:\Users\foyje\Downloads\Java> 
