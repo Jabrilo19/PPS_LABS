@@ -14,7 +14,7 @@ class BankAccountTest {
         account = new BankAccount(100.0);
     }
 
-    /** 1. Add an @AfterEach annotation and method to delete the current bank account to make it available for garbage collection */
+    // 1. Add an @AfterEach annotation and method to delete the current bank account to make it available for garbage collection
     @AfterEach
     void tearDown() {
         account = null;
@@ -22,21 +22,21 @@ class BankAccountTest {
 
     @Test
     void testDeposit() {
-        /** 2. deposit $50 and check that the balance is 150 */
+        // 2. deposit $50 and check that the balance is 150
         account.deposit(50.0);
         assertEquals(150.0, account.getBalance(), "Balance should be 150.0 after a $50 deposit");
     }
 
     @Test
     void testWithdraw() {
-        /** 3. withdraw $40 and check that the balance is $60; remember that each test is done on a fresh instance of bank account */
+        // 3. withdraw $40 and check that the balance is $60; remember that each test is done on a fresh instance of bank account
         account.withdraw(40.0);
         assertEquals(60.0, account.getBalance(), "Balance should be 60.0 after a $40 withdrawal");
     }
 
     @Test
     void testInvalidDeposit() {
-        /** 4. Deposit a negative amount and check if an exception is thrown */
+        // 4. Deposit a negative amount and check if an exception is thrown
         assertThrows(IllegalArgumentException.class, () -> {
             account.deposit(-20.0);
         }, "Depositing a negative amount should throw an IllegalArgumentException");
@@ -44,13 +44,13 @@ class BankAccountTest {
 
     @Test
     void testOverdraft() {
-        /** 5. Verify that Withdrawing more than the current balance throws an exception */
+        // 5. Verify that Withdrawing more than the current balance throws an exception
         assertThrows(IllegalArgumentException.class, () -> {
             account.withdraw(200.0);
         }, "Withdrawing more than the balance should throw an IllegalArgumentException");
     }
 
-    /** 6. Add a test to check that an Exception is thrown when trying to create a new bankaccout with a negaive initial balance */
+    // 6. Add a test to check that an Exception is thrown when trying to create a new bankaccout with a negaive initial balance
     @Test
     void testNegativeInitialBalance() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -58,7 +58,7 @@ class BankAccountTest {
         }, "Creating an account with a negative initial balance should throw an IllegalArgumentException");
     }
 
-    /** Test for 1c: Transfer method */
+    // Test for 1c: Transfer method
     @Test
     void testTransfer() {
         BankAccount targetAccount = new BankAccount(50.0);
@@ -68,261 +68,4 @@ class BankAccountTest {
         assertEquals(75.0, targetAccount.getBalance(), "Target account balance should increase by $25");
     }
 }
-
-PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class BankAccountTest                                   
-  
-Thanks for using JUnit! Support its development at https://junit.org/sponsoring
-
-.
-+-- JUnit Platform Suite [OK]
-+-- JUnit Jupiter [OK]
-| '-- BankAccountTest [OK]
-|   +-- testNegativeInitialBalance() [OK]
-|   +-- testWithdraw() [OK]
-|   +-- testOverdraft() [OK]
-|   +-- testInvalidDeposit() [OK]
-|   +-- testDeposit() [OK]
-|   '-- testTransfer() [OK]
-'-- JUnit Vintage [OK]
-
-Test run finished after 345 ms
-[         4 containers found      ]
-[         0 containers skipped    ]
-[         4 containers started    ]
-[         0 containers aborted    ]
-[         4 containers successful ]
-[         0 containers failed     ]
-[         6 tests found           ]
-[         0 tests skipped         ]
-[         6 tests started         ]
-[         0 tests aborted         ]
-[         6 tests successful      ]
-[         0 tests failed          ]
-
-
-public class BankAccount {
-
-    private double balance;
-
-    // Constructor
-    public BankAccount(double initialBalance) {
-        if (initialBalance < 0) {
-            throw new IllegalArgumentException("Initial balance cannot be negative");
-        }
-        this.balance = initialBalance;
-    }
-
-    // Method to deposit an amount
-    public void deposit(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Deposit amount must be greater than zero");
-        }
-        balance += amount;
-    }
-
-    // Method to withdraw an amount
-    public void withdraw(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Withdraw amount must be greater than zero");
-        }
-        if (amount > balance) {
-            throw new IllegalArgumentException("Insufficient funds");
-        }
-        balance -= amount;
-    } 
-
-    // 1c. Method to transfer from this account to another account
-    public void transfer(BankAccount targetAccount, double amount) {
-        // Reuse the withdraw logic for the illegal balance tranfers 
-        this.withdraw(amount);
-        // Reuse the deposit logic 
-        targetAccount.deposit(amount);
-    }
-
-    // Method to get the current balance
-    public double getBalance() {
-        return balance;
-    }
-}
-
-PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class BankAccount     
-
-Thanks for using JUnit! Support its development at https://junit.org/sponsoring
-
-.
-+-- JUnit Platform Suite [OK]
-+-- JUnit Jupiter [OK]
-'-- JUnit Vintage [OK]
-
-Test run finished after 448 ms
-[         3 containers found      ]
-[         0 containers skipped    ]
-[         3 containers started    ]
-[         0 containers aborted    ]
-[         3 containers successful ]
-[         0 containers failed     ]
-[         0 tests found           ]
-[         0 tests skipped         ]
-[         0 tests started         ]
-[         0 tests aborted         ]
-[         0 tests successful      ]
-[         0 tests failed          ]
-
-PS C:\Users\foyje\Downloads\Java>
-
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class Week15_lab {
-    
-    // 2. Verifies no value in the array is less than 20
-    @Test 
-    void testArrayValuesNotLessThanTwenty() {
-        int[] values = {25, 30, 21, 40}; 
-        
-        for (int val : values) {
-            assertTrue(val >= 20); // Fails immediately if a value is under 20
-        }
-    }
-
-    // 3. Verifies the two strings are exact matches
-    @Test 
-    void testStringsContainSameCharacters() {
-        String strOne = "hello";
-        String strTwo = "hello";
-        
-        assertEquals(strOne, strTwo); // Fails if the strings differ
-    }
-
-    // 4. Yes, the other methods will still be executed because each test is done in silotaion. if something fails, it will say that on the console
-}
-
-PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class Week15_lab
-
-Thanks for using JUnit! Support its development at https://junit.org/sponsoring
-
-.
-+-- JUnit Platform Suite [OK]
-+-- JUnit Jupiter [OK]
-| '-- Week15_lab [OK]
-|   +-- testArrayValuesNotLessThanTwenty() [OK]
-|   '-- testStringsContainSameCharacters() [OK]
-'-- JUnit Vintage [OK]
-
-Test run finished after 438 ms
-[         4 containers found      ]
-[         0 containers skipped    ]
-[         4 containers started    ]
-[         0 containers aborted    ]
-[         4 containers successful ]
-[         0 containers failed     ]
-[         2 tests found           ]
-[         0 tests skipped         ]
-[         2 tests started         ]
-[         0 tests aborted         ]
-[         2 tests successful      ]
-[         0 tests failed          ]
-
-PS C:\Users\foyje\Downloads\Java> 
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-class ComputationsTest {
-
-    @Test
-    void testFibonacci() {
-        assertEquals(0, Computations.fibonacci(0), "Fibonacci of 0 should be 0");
-        assertEquals(1, Computations.fibonacci(1), "Fibonacci of 1 should be 1");
-        assertEquals(5, Computations.fibonacci(5), "Fibonacci of 5 should be 5");
-        assertEquals(8, Computations.fibonacci(6), "Fibonacci of 6 should be 8");
-        
-        // Edge case: Negative input should throw exception
-        assertThrows(IllegalArgumentException.class, () -> {
-            Computations.fibonacci(-1);
-        }, "Negative input should throw IllegalArgumentException");
-    }
-
-    @Test
-    void testIsPrime() {
-        assertFalse(Computations.isPrime(-5), "Negative numbers are not prime");
-        assertFalse(Computations.isPrime(0), "0 is not prime");
-        assertFalse(Computations.isPrime(1), "1 is not prime");
-        assertTrue(Computations.isPrime(2), "2 is a prime number (edge case)");
-        assertTrue(Computations.isPrime(7), "7 is a prime number");
-        assertFalse(Computations.isPrime(9), "9 is not prime (divisible by 3)");
-    }
-
-    @Test
-    void testIsEven() {
-        assertTrue(Computations.isEven(0), "0 is even");
-        assertTrue(Computations.isEven(4), "4 is even");
-        assertTrue(Computations.isEven(-2), "-2 is even");
-        assertFalse(Computations.isEven(3), "3 is not even");
-    }
-
-    @Test
-    void testIsOdd() {
-        assertFalse(Computations.isOdd(0), "0 is not odd");
-        assertTrue(Computations.isOdd(3), "3 is odd");
-        assertTrue(Computations.isOdd(-5), "-5 is odd");
-        assertFalse(Computations.isOdd(4), "4 is not odd");
-    }
-
-    @Test
-    void testToCelsius() {
-        // Using a small delta (0.001) for floating-point comparisons
-        assertEquals(0.0, Computations.toCelsius(32.0), 0.001, "32F should be 0C");
-        assertEquals(100.0, Computations.toCelsius(212.0), 0.001, "212F should be 100C");
-        assertEquals(-40.0, Computations.toCelsius(-40.0), 0.001, "-40F should be -40C");
-    }
-
-    @Test
-    void testToFahrenheit() {
-        assertEquals(32.0, Computations.toFahrenheit(0.0), 0.001, "0C should be 32F");
-        assertEquals(212.0, Computations.toFahrenheit(100.0), 0.001, "100C should be 212F");
-        assertEquals(-40.0, Computations.toFahrenheit(-40.0), 0.001, "-40C should be -40F");
-    }
-}
-
-PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class ComputationsTest
-
-Thanks for using JUnit! Support its development at https://junit.org/sponsoring
-
-.
-+-- JUnit Platform Suite [OK]
-+-- JUnit Jupiter [OK]
-| '-- ComputationsTest [OK]
-|   +-- testToFahrenheit() [OK]
-|   +-- testIsOdd() [OK]
-|   +-- testFibonacci() [OK]
-|   +-- testToCelsius() [OK]
-|   +-- testIsEven() [OK]
-|   '-- testIsPrime() [OK]
-'-- JUnit Vintage [OK]
-
-Test run finished after 392 ms
-[         4 containers found      ]
-[         0 containers skipped    ]
-[         4 containers started    ]
-[         0 containers aborted    ]
-[         4 containers successful ]
-[         0 containers failed     ]
-[         6 tests found           ]
-[         0 tests skipped         ]
-[         6 tests started         ]
-[         0 tests aborted         ]
-[         6 tests successful      ]
-[         0 tests failed          ]
-
-
-
-
-
-
-
-
-
-
 
