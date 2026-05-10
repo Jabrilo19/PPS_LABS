@@ -58,7 +58,7 @@ class BankAccountTest {
         }, "Creating an account with a negative initial balance should throw an IllegalArgumentException");
     }
 
-    // Test for 1c: Transfer method
+    // Test for 1c: Transfer method from one account to another
     @Test
     void testTransfer() {
         BankAccount targetAccount = new BankAccount(50.0);
@@ -68,4 +68,181 @@ class BankAccountTest {
         assertEquals(75.0, targetAccount.getBalance(), "Target account balance should increase by $25");
     }
 }
+
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class Week15_lab {
+
+    // 2. Write a JUnit test assuming you have an array of int values and 
+    // you only want the JUnit test to fail if any of the values are less than 20
+    @Test
+    void testArrayValuesNotLessThanTwenty() {
+        int[] values = {25, 30, 21, 40}; 
+        for (int val : values) {
+            assertTrue(val >= 20);
+        }
+    }
+
+    // 3. Write a JUnit test assuming you have two String references named strOne an strTwo and 
+    // you only want it to pass if the two Strings contain the    same characters
+    @Test
+    void testStringsContainSameCharacters() {
+        String strOne = "hello";
+        String strTwo = "hello";
+        assertEquals(strOne, strTwo);
+    }
+}
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class ComputationsTest {
+
+    @Test
+    void testFibonacci() {
+        assertEquals(0, Computations.fibonacci(0), "Fibonacci of 0 should be 0");
+        assertEquals(1, Computations.fibonacci(1), "Fibonacci of 1 should be 1");
+        assertEquals(5, Computations.fibonacci(5), "Fibonacci of 5 should be 5");
+        assertEquals(8, Computations.fibonacci(6), "Fibonacci of 6 should be 8");
+        
+        // Edge case: Negative input should throw exception
+        assertThrows(IllegalArgumentException.class, () -> {
+            Computations.fibonacci(-1);
+        }, "Negative input should throw IllegalArgumentException");
+    }
+
+    @Test
+    void testIsPrime() {
+        assertFalse(Computations.isPrime(-5), "Negative numbers are not prime");
+        assertFalse(Computations.isPrime(0), "0 is not prime");
+        assertFalse(Computations.isPrime(1), "1 is not prime");
+        assertTrue(Computations.isPrime(2), "2 is a prime number (edge case)");
+        assertTrue(Computations.isPrime(7), "7 is a prime number");
+        assertFalse(Computations.isPrime(9), "9 is not prime (divisible by 3)");
+    }
+
+    @Test
+    void testIsEven() {
+        assertTrue(Computations.isEven(0), "0 is even");
+        assertTrue(Computations.isEven(4), "4 is even");
+        assertTrue(Computations.isEven(-2), "-2 is even");
+        assertFalse(Computations.isEven(3), "3 is not even");
+    }
+
+    @Test
+    void testIsOdd() {
+        assertFalse(Computations.isOdd(0), "0 is not odd");
+        assertTrue(Computations.isOdd(3), "3 is odd");
+        assertTrue(Computations.isOdd(-5), "-5 is odd");
+        assertFalse(Computations.isOdd(4), "4 is not odd");
+    }
+
+    @Test
+    void testToCelsius() {
+        // Using a small delta (0.001) for floating-point comparisons
+        assertEquals(0.0, Computations.toCelsius(32.0), 0.001, "32F should be 0C");
+        assertEquals(100.0, Computations.toCelsius(212.0), 0.001, "212F should be 100C");
+        assertEquals(-40.0, Computations.toCelsius(-40.0), 0.001, "-40F should be -40C");
+    }
+
+    @Test
+    void testToFahrenheit() {
+        assertEquals(32.0, Computations.toFahrenheit(0.0), 0.001, "0C should be 32F");
+        assertEquals(212.0, Computations.toFahrenheit(100.0), 0.001, "100C should be 212F");
+        assertEquals(-40.0, Computations.toFahrenheit(-40.0), 0.001, "-40C should be -40F");
+    }
+}
+
+
+PS C:\Users\foyje\Downloads\Java> javac -cp ".;junit-platform-console-standalone-6.0.3.jar" Week15_lab.java                          
+PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class Week15_lab      
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+.
++-- JUnit Platform Suite [OK]
++-- JUnit Jupiter [OK]
+| '-- Week15_lab [OK]
+|   +-- testArrayValuesNotLessThanTwenty() [OK]
+|   '-- testStringsContainSameCharacters() [OK]
+'-- JUnit Vintage [OK]
+
+Test run finished after 88 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         2 tests found           ]
+[         0 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         0 tests failed          ]
+
+PS C:\Users\foyje\Downloads\Java> javac -cp ".;junit-platform-console-standalone-6.0.3.jar" BankAccount.java BankAccountTest.java Computations.java ComputationsTest.java
+PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class BankAccountTest                                   
+  
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+.
++-- JUnit Platform Suite [OK]
++-- JUnit Jupiter [OK]
+| '-- BankAccountTest [OK]
+|   +-- testNegativeInitialBalance() [OK]
+|   +-- testWithdraw() [OK]
+|   +-- testOverdraft() [OK]
+|   +-- testInvalidDeposit() [OK]
+|   +-- testDeposit() [OK]
+|   '-- testTransfer() [OK]
+'-- JUnit Vintage [OK]
+
+Test run finished after 85 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         6 tests found           ]
+[         0 tests skipped         ]
+[         6 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         0 tests failed          ]
+
+PS C:\Users\foyje\Downloads\Java> java -jar junit-platform-console-standalone-6.0.3.jar execute -cp . --select-class ComputationsTest                                  
+  
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+.
++-- JUnit Platform Suite [OK]
++-- JUnit Jupiter [OK]
+| '-- ComputationsTest [OK]
+|   +-- testToFahrenheit() [OK]
+|   +-- testIsOdd() [OK]
+|   +-- testFibonacci() [OK]
+|   +-- testToCelsius() [OK]
+|   +-- testIsEven() [OK]
+|   '-- testIsPrime() [OK]
+'-- JUnit Vintage [OK]
+
+Test run finished after 103 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         6 tests found           ]
+[         0 tests skipped         ]
+[         6 tests started         ]
+[         0 tests aborted         ]
+[         6 tests successful      ]
+[         0 tests failed          ]
+
+PS C:\Users\foyje\Downloads\Java> 
 
