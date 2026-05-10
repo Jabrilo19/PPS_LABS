@@ -45,10 +45,10 @@ public class Week13_Lab {
 
 
        
-        // 3: Define a Predicate to filter employees with salary > $50000.
-
-        // Apply this Predicate to filter the List to get highEarners.
-        // A Predicate returns true or false -> use it to sort.
+        // 3: Define a Predicate to filter employees with salary > $50000
+        
+        // Apply this Predicate to filter the List to get highEarners
+        // A Predicate returns true or false -> use it to sort
         Predicate<Employee> isHighEarner = emp -> emp.getSalary() > 50000;
         
         List<Employee> highEarners = employeesList.stream()
@@ -62,7 +62,7 @@ public class Week13_Lab {
         highEarners.forEach(highE -> System.out.println(highE));
 
 
-        // 5: Write a Function<Employee, Employee> to apply 15% tax to highEarners. Returns an Employee with adjusted salary.
+        // 5: Write a Function<Employee, Employee> to apply 15% tax to highEarners. Returns an Employee with adjusted salary
         // A Function takes one type and either returns the same or another type 
         
         //get salary -> * it by .85 for the 15% tax
@@ -70,15 +70,13 @@ public class Week13_Lab {
             new Employee(emp.getId(), emp.getName(), emp.getSalary() * 0.85);
 
 
-        // 6: Create a Function<Employee, String> named formatSalary 
-        // to format the salary to 2 decimal places with $ attached.
+        // 6: Create a Function<Employee, String> named formatSalary to format the salary to 2 decimal places with $ attached
        
         Function<Employee, String> formatSalary = emp -> 
             String.format("$%.2f", emp.getSalary());
 
 
-        // 7: Stream employeeList, filter, apply tax, format and 
-        // create a List<Employee> of highEarners with new salaries.
+        // 7: Stream employeeList, filter, apply tax, format and create a List<Employee> of highEarners with new salaries.
 
         System.out.println("\n--- Problem 7: Taxed High Earners ---");
         
