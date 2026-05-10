@@ -1,0 +1,136 @@
+import java.util.Random;
+
+public class Week16_lab{
+    public static void main(String[] args) {
+        
+        // Implementation 1: TryThreeTimes
+        DoNotGiveUp<String> TryThreeTimes = () -> {
+            Random rand = new Random();
+            for (int i = 1; i <= 3; i++) {
+                int number = rand.nextInt(100) + 1;
+                if (number > 50) {
+                    return "You succeeded on attempt " + i;
+                }
+            }
+            return "Failed";
+        };
+
+        // Implementation 2: TryForEver
+        DoNotGiveUp<String> TryForEver = () -> {
+            for (int i = 1; i <= 1000; i++) {
+                if (Math.random() < 0.4) {
+                    return "You succeeded on attempt " + i;
+                }
+            }
+            return "Failed after 1000 attempts";
+        };
+
+        // Execute and print results
+        System.out.println("--- Executing TryThreeTimes ---");
+        System.out.println(TryThreeTimes.execute());
+
+        System.out.println("\n--- Executing TryForEver ---");
+        System.out.println(TryForEver.execute());
+    }
+}
+
+@FunctionalInterface
+interface DoNotGiveUp<T> {
+    T execute();
+}
+
+--- Executing TryThreeTimes ---
+You succeeded on attempt 1
+
+--- Executing TryForEver ---
+You succeeded on attempt 2
+
+
+
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class Week16_lab2{
+    public static void main(String[] args) {
+        int[] sizes = {1000, 5000, 10000};
+        
+        for (int n : sizes) {
+            System.out.println("--- Testing for n = " + n + " ---");
+            runBenchmark(n);
+            System.out.println();
+        }
+    }
+
+    static void runBenchmark(int n) {
+        // Initialize Array A (1D) and Array B (2D Matrix)
+        int[] a = new int[n];
+        int[][] b = new int[n][n];
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            a[i] = rand.nextInt(10) + 1;
+            for (int j = 0; j < n; j++) {
+                b[i][j] = rand.nextInt(10) + 1;
+            }
+        }
+
+        // a) Sequential execution with nested loops
+        long startTimeSeq = System.currentTimeMillis();
+        long[] resultSeq = new long[n];
+        
+        for (int j = 0; j < n; j++) {
+            long sum = 0;
+            for (int i = 0; i < n; i++) {
+                sum += (long) a[i] * b[j][i];
+            }
+            resultSeq[j] = sum;
+        }
+        long durationSeq = System.currentTimeMillis() - startTimeSeq;
+
+        // b) Parallel execution using a Thread Pool
+        long startTimePool = System.currentTimeMillis();
+        long[] resultPool = new long[n];
+        
+        // Dynamically get the number of CPU cores available on the machine
+        int cores = Runtime.getRuntime().availableProcessors();
+        ExecutorService pool = Executors.newFixedThreadPool(cores);
+
+        for (int j = 0; j < n; j++) {
+            final int row = j; 
+            // Submit each row's calculation as a separate task to the pool
+            pool.submit(() -> {
+                long sum = 0;
+                for (int i = 0; i < n; i++) {
+                    sum += (long) a[i] * b[row][i];
+                }
+                resultPool[row] = sum;
+            });
+        }
+        
+        pool.shutdown(); // Stop accepting new tasks
+        try {
+            pool.awaitTermination(1, TimeUnit.MINUTES); // Wait for all tasks to finish
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long durationPool = System.currentTimeMillis() - startTimePool;
+
+        // c) Print timings
+        System.out.printf("Sequential Time: %d ms\n", durationSeq);
+        System.out.printf("Thread Pool Time (%d cores): %d ms\n", cores, durationPool);
+    }
+}
+
+--- Testing for n = 1000 ---
+Sequential Time: 0 ms
+Thread Pool Time (20 cores): 72 ms
+
+--- Testing for n = 5000 ---
+Sequential Time: 16 ms
+Thread Pool Time (20 cores): 32 ms
+
+--- Testing for n = 10000 ---
+Sequential Time: 61 ms
+Thread Pool Time (20 cores): 31 ms
