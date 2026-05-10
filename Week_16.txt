@@ -2,6 +2,11 @@ import java.util.Random;
 
 public class Week16_lab{
     public static void main(String[] args) {
+
+        // 1. Write a functional interface called DoNotGiveUp<T> that has a method T execute()
+        // The purpose of the interface is to keep trying a certain operation by calling execute() as many times as specified in its implementation
+        // Then write two of these interface types, (1) TryThreeTimes and (2) TryForEver, the first one tries the
+        // operation at most three times or until a condition is met, and the second one tries 1000 times till a certain condition is met
         
         // Implementation 1: TryThreeTimes
         DoNotGiveUp<String> TryThreeTimes = () -> {
