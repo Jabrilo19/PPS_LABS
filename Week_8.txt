@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
 
+// Write a Java Program, DisplayCountries that allows user to put in a language name as a String and have
+// the program display a list of countries in the nation database where that language is either an official or
+// an unofficial language.
+
 public class DisplayCountries {
     public static void main(String[] args) {
         // 1. Ask user for a language
